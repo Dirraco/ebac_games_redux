@@ -1,29 +1,28 @@
 import { Provider } from 'react-redux'
-import Header from './components/Header'
-import Produtos from './containers/Produtos'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import EstiloGlobal, { Container } from './css'
+import store from './store'
+import Home from './pages/Home'
+import Cadastro from './pages/Cadastro'
 
-import { GlobalStyle } from './styles'
-
-import { store } from './store'
-
-export type Game = {
-  id: number
-  titulo: string
-  plataformas: string[]
-  precoAntigo: number
-  preco: number
-  categoria: string
-  imagem: string
-}
+const rotas = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />
+  },
+  {
+    path: '/novo',
+    element: <Cadastro />
+  }
+])
 
 function App() {
   return (
     <Provider store={store}>
-      <GlobalStyle />
-      <div className="container">
-        <Header />
-        <Produtos />
-      </div>
+      <EstiloGlobal />
+      <Container>
+        <RouterProvider router={rotas} />
+      </Container>
     </Provider>
   )
 }
